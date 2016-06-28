@@ -26,7 +26,7 @@
 - [ ] Als klant wil ik dat de app een betrouwbare uitstraling heeft
   - [X] geen lorem ipsems,
   - [ ] vormgeving is netjes,
-  - [ ] houdt rekening met ontbreken internetverbinding
+  - [X] houdt rekening met ontbreken internetverbinding
 
 ### Would haves
 - [ ] Als opdrachtgever wil ik de app zowel engels als nederlandstalig hebben (alleen de app tekst, de tekst uit de webservice hoef je niet te vertalen)
