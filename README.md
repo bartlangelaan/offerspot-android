@@ -10,7 +10,7 @@ De broncode, mét wijzigingen, is hier te vinden: https://github.com/bartlangela
 
 De screencast kan hier worden bekeken: https://www.youtube.com/watch?v=cqyD2ZhX-Os. 
 
-Tijdens het screencasten van mijn eigen app was ik zo onder de indruk, dat ik helemaal was vergeten om het pull-to-refresh ook op te nemen. Deze jongen heeft dat speciaal voor zijn favoriete docent nog opgenomen in een aparte screencast; deze is hier te vinden: https://www.youtube.com/watch?v=cqyD2ZhX-Os.
+Tijdens het screencasten van mijn eigen app was ik zo onder de indruk, dat ik helemaal was vergeten om het pull-to-refresh ook op te nemen. Deze jongen heeft dat speciaal voor zijn favoriete docent nog opgenomen in een aparte screencast; deze is hier te vinden: https://www.youtube.com/watch?v=fgrYOhmOHkc.
 
 ## User stories
 
