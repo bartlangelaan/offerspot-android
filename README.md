@@ -17,7 +17,7 @@
 - [X] Als ontwikkelaar wil ik dat de code makkelijk te onderhouden is
   - [X] beschrijvende variabele en class namen
   - [X] constante waarden gebruikt waar mogelijk
-- [ ] Als gebruiker wil ik op een kaart kunnen zien waar alle aanbiedingen te koop zijn
+- [X] Als gebruiker wil ik op een kaart kunnen zien waar alle aanbiedingen te koop zijn
 - [ ] Als gebruiker wil ik dat de kaart gecentreerd is en gecentreerd blijft als ik me verplaats, op mijn huidige locatie
 - [X] Als gebruiker wil ik in de lijst in een nette 2 koloms opmaak ook de prijs achter een artikel kunnen zien
 - [ ] Als gebruiker wil ik de aanbiedingen met een 'pull to refresh' kunnen verversen

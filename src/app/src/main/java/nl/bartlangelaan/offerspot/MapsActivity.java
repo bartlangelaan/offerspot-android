@@ -3,21 +3,32 @@ package nl.bartlangelaan.offerspot;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
+
+import nl.bartlangelaan.offerspot.objects.Offer;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
+    /**
+     * Holds the offers sent by the MainActivity
+     */
+    private Offer[] offers;
+
+    private Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        // Get offers passed from MainActivity
+        offers = gson.fromJson(getIntent().getExtras().getString("offers"), Offer[].class);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -36,11 +47,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        // For each offer..
+        for (Offer offer : offers) {
+            // Create the location
+            LatLng location = new LatLng(
+                    offer.shop.location.latitude,
+                    offer.shop.location.longitude
+            );
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            // Add marker
+            googleMap.addMarker(
+                    new MarkerOptions().title(offer.shop.name).position(location)
+            ).showInfoWindow();
+        }
     }
 }

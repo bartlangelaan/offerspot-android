@@ -53,7 +53,9 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+                Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+                intent.putExtra("offers", gson.toJson(offers));
+                startActivity(intent);
             }
         });
 
