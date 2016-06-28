@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import nl.bartlangelaan.offerspot.adapters.OffersAdapter;
 import nl.bartlangelaan.offerspot.objects.Offer;
 import nl.bartlangelaan.offerspot.utils.API;
 
@@ -59,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                OffersAdapter adapter = new OffersAdapter(getBaseContext(), offers);
+                list.setAdapter(adapter);
 
                 Log.d(TAG, offers.toString());
             }
