@@ -19,7 +19,7 @@
   - [X] constante waarden gebruikt waar mogelijk
 - [ ] Als gebruiker wil ik op een kaart kunnen zien waar alle aanbiedingen te koop zijn
 - [ ] Als gebruiker wil ik dat de kaart gecentreerd is en gecentreerd blijft als ik me verplaats, op mijn huidige locatie
-- [ ] Als gebruiker wil ik in de lijst in een nette 2 koloms opmaak ook de prijs achter een artikel kunnen zien
+- [X] Als gebruiker wil ik in de lijst in een nette 2 koloms opmaak ook de prijs achter een artikel kunnen zien
 - [ ] Als gebruiker wil ik de aanbiedingen met een 'pull to refresh' kunnen verversen
 - [ ] Als gebruiker wil ik dat in de detailweergave ook een plaatje van het product te zien is
 - [ ] Als gebruiker wil ik een lijst met de 3 laatst bekeken producten op kunnen vragen, ook als de app afgesloten is geweest
