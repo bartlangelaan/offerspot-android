@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -29,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
     Gson gson = new Gson();
     private String TAG = "MAIN";
     private ListView list;
-    private ProgressBar progress;
     private OffersAdapter adapter;
     private Offer[] offers;
+    private SwipeRefreshLayout swipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         list = (ListView) findViewById(R.id.listView);
-        progress = (ProgressBar) findViewById(R.id.progressbar_loading);
+        swipe = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
 
         // Show the toolbar
         setSupportActionBar(toolbar);
@@ -70,6 +71,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshList();
+            }
+        });
     }
 
     public void onResume() {
@@ -81,13 +88,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void refreshList() {
         // Show progress bar
-        progress.setVisibility(View.VISIBLE);
+        swipe.setRefreshing(true);
 
         API.getInstance(this).GetOffers(new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 // Remove the progress bar
-                progress.setVisibility(View.GONE);
+                swipe.setRefreshing(false);
 
                 // Transform all offers to Offer objects
                 offers = new Offer[0];
@@ -105,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Snackbar.make(findViewById(R.id.coordinatorLayout), "Connection error! Do you have interwebz?", Snackbar.LENGTH_LONG).show();
-                progress.setVisibility(View.GONE);
+                swipe.setRefreshing(false);
             }
         });
     }
