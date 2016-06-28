@@ -12,6 +12,9 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+/**
+ * With this class, requests are made to the Bootb products service
+ */
 public class API {
     /**
      * Create one API instance

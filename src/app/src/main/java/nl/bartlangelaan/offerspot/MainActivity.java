@@ -78,11 +78,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void refreshList() {
+        // Show progress bar
+        progress.setVisibility(View.VISIBLE);
+
+        // Remove existing items
+        if (adapter != null) adapter.clear();
+
         API.getInstance(this).GetOffers(new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                // Remove the progress bar
                 progress.setVisibility(View.GONE);
 
+                // Transform all offers to Offer objects
                 offers = new Offer[0];
                 try {
                     offers = gson.fromJson(response.getJSONArray("products").toString(), Offer[].class);
@@ -90,13 +98,14 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
+                // Create the OffersAdapter and use it on the list
                 adapter = new OffersAdapter(getBaseContext(), offers);
                 list.setAdapter(adapter);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Snackbar.make(findViewById(R.id.coordinatorLayout), "No internet connection available", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(findViewById(R.id.coordinatorLayout), "Connection error! Do you have interwebz?", Snackbar.LENGTH_LONG).show();
                 progress.setVisibility(View.GONE);
             }
         });
@@ -104,19 +113,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu; this adds items to the action bar
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // Get the id of the selected item
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        // Check which item was selected
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
         }
