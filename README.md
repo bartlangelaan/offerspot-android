@@ -8,7 +8,7 @@
 - [X] Als gebruiker wil ik een overzicht van alle aanbiedingen kunnen bekijken
 - [X] Als klant wil ik dat de aanbiedingen in de app geladen worden vanuit mijn webservice
 - [ ] Als gebruiker wil ik via instellingen kunnen kiezen voor alleen 'nonfood' producten (default = alles)
-- [ ] Als gebruiker wil ik als ik in de lijst een aanbieding selecteer dat ik dan bij de detailweergave kom met de prijs en de omschrijving
+- [X] Als gebruiker wil ik als ik in de lijst een aanbieding selecteer dat ik dan bij de detailweergave kom met de prijs en de omschrijving
 - [ ] Als gebruiker wil ik via de detailweergave bij de kaart kunnen komen die daar dan een marker toont met de naam van de winkel en daarop gecentreerd is
 - [X] Als klant wil ik dat de app een echte naam heeft, en niet 'eindopdracht'
 
