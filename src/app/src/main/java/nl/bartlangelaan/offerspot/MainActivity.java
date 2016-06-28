@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -36,15 +38,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        ListView list = (ListView) findViewById(R.id.listView);
+        final ProgressBar progress = (ProgressBar) findViewById(R.id.progressbar_loading);
+
         API.getInstance(this).GetAllOffers(new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Log.i(TAG, "Response recieved" + response.toString());
+                progress.setVisibility(View.GONE);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Error when getting data:" + error.toString());
+                progress.setVisibility(View.GONE);
             }
         });
     }
