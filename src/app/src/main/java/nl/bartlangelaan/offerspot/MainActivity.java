@@ -26,13 +26,12 @@ import nl.bartlangelaan.offerspot.utils.API;
 
 public class MainActivity extends AppCompatActivity {
 
+    Gson gson = new Gson();
     private String TAG = "MAIN";
     private ListView list;
     private ProgressBar progress;
     private OffersAdapter adapter;
     private Offer[] offers;
-
-    Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +68,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void onResume() {
+        super.onResume();
+
         // Refresh now
         refreshList();
     }
 
     private void refreshList() {
-        API.getInstance(this).GetAllOffers(new Response.Listener<JSONObject>() {
+        API.getInstance(this).GetOffers(new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 progress.setVisibility(View.GONE);

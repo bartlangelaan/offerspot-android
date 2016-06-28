@@ -1,6 +1,8 @@
 package nl.bartlangelaan.offerspot.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -15,25 +17,32 @@ public class API {
      * Create one API instance
      */
     private static API ourInstance = new API();
+    /**
+     * All requests are send to the queue
+     */
+    private static RequestQueue queue;
+    private static SharedPreferences sharedPreferences;
+    /**
+     * All requests begin with this url
+     */
+    private String baseUrl = "http://docent.cmi.hro.nl/bootb/service/products";
 
     /**
      * Make a singleton for easy access. Context is required
      */
     public static API getInstance(Context context) {
         queue = Volley.newRequestQueue(context);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         return ourInstance;
     }
 
-    /**
-     * All requests are send to the queue
-     */
-    private static RequestQueue queue;
-
-    /**
-     * All requests begin with this url
-     */
-    private String baseUrl = "http://docent.cmi.hro.nl/bootb/service/products";
-
+    public void GetOffers(Response.Listener<JSONObject> successListener, Response.ErrorListener errorListener) {
+        if (sharedPreferences.getBoolean("show_food", true)) {
+            GetAllOffers(successListener, errorListener);
+        } else {
+            GetAllOffers("/nonfood", successListener, errorListener);
+        }
+    }
     /**
      * Gets all offers
      *
