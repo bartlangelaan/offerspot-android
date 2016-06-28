@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                refreshList();
+                startActivity(new Intent(getApplicationContext(), MapsActivity.class));
             }
         });
 
