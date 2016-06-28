@@ -5,7 +5,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +25,8 @@ import nl.bartlangelaan.offerspot.utils.API;
 public class MainActivity extends AppCompatActivity {
 
     private String TAG = "MAIN";
+    private ListView list;
+    private ProgressBar progress;
 
     Gson gson = new Gson();
 
@@ -40,18 +41,20 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                refreshList();
             }
         });
 
-        final ListView list = (ListView) findViewById(R.id.listView);
-        final ProgressBar progress = (ProgressBar) findViewById(R.id.progressbar_loading);
+        list = (ListView) findViewById(R.id.listView);
+        progress = (ProgressBar) findViewById(R.id.progressbar_loading);
 
+        refreshList();
+    }
+
+    private void refreshList() {
         API.getInstance(this).GetAllOffers(new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.i(TAG, "Response recieved" + response.toString());
                 progress.setVisibility(View.GONE);
 
                 Offer[] offers = new Offer[0];
@@ -63,13 +66,11 @@ public class MainActivity extends AppCompatActivity {
 
                 OffersAdapter adapter = new OffersAdapter(getBaseContext(), offers);
                 list.setAdapter(adapter);
-
-                Log.d(TAG, offers.toString());
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Error when getting data:" + error.toString());
+                Snackbar.make(findViewById(R.id.coordinatorLayout), "No internet connection available", Snackbar.LENGTH_LONG).show();
                 progress.setVisibility(View.GONE);
             }
         });
