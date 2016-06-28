@@ -81,9 +81,6 @@ public class MainActivity extends AppCompatActivity {
         // Show progress bar
         progress.setVisibility(View.VISIBLE);
 
-        // Remove existing items
-        if (adapter != null) adapter.clear();
-
         API.getInstance(this).GetOffers(new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
