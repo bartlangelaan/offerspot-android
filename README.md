@@ -1,4 +1,16 @@
-# Offerspot for Android
+# OfferSpot for Android
+
+OfferSpot is dé app van Rotterdam waarin alle aanbiedingen in de buurt overzichtelijk verschijnen.
+
+## Broncode
+
+De broncode, mét wijzigingen, is hier te vinden: https://github.com/bartlangelaan/offerspot-android
+
+## Screencast
+
+De screencast kan hier worden bekeken: https://www.youtube.com/watch?v=cqyD2ZhX-Os. 
+
+Tijdens het screencasten van mijn eigen app was ik zo onder de indruk, dat ik helemaal was vergeten om het pull-to-refresh ook op te nemen. Deze jongen heeft dat speciaal voor zijn favoriete docent nog opgenomen in een aparte screencast; deze is hier te vinden: https://www.youtube.com/watch?v=cqyD2ZhX-Os.
 
 ## User stories
 
@@ -14,6 +26,7 @@
 
 
 ### Could haves
+
 - [X] Als ontwikkelaar wil ik dat de code makkelijk te onderhouden is
   - [X] beschrijvende variabele en class namen
   - [X] constante waarden gebruikt waar mogelijk
@@ -29,4 +42,14 @@
   - [X] houdt rekening met ontbreken internetverbinding
 
 ### Would haves
+
 - [ ] Als opdrachtgever wil ik de app zowel engels als nederlandstalig hebben (alleen de app tekst, de tekst uit de webservice hoef je niet te vertalen)
+
+
+### Extra features
+
+- [X] Er zit een hele mooie knop op de detail-view.
+- [X] Volledig in Material Design
+- [X] Prachtig logo
+- [X] Slaat voorkeuren online op
+- [X] Werkt met Volley, Gson en veel meer awesome shit!
