@@ -5,9 +5,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -27,17 +29,28 @@ public class MainActivity extends AppCompatActivity {
     private String TAG = "MAIN";
     private ListView list;
     private ProgressBar progress;
+    private OffersAdapter adapter;
+    private Offer[] offers;
 
     Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        // Show the activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Find all elements
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        list = (ListView) findViewById(R.id.listView);
+        progress = (ProgressBar) findViewById(R.id.progressbar_loading);
+
+        // Show the toolbar
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        // Refresh on click on fab
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,9 +58,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        list = (ListView) findViewById(R.id.listView);
-        progress = (ProgressBar) findViewById(R.id.progressbar_loading);
+        // When a list item is clicked, open new activity
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Offer offer = adapter.getItem(i);
+                Log.d(TAG, offer.toString());
+            }
+        });
 
+        // Refresh now
         refreshList();
     }
 
@@ -57,14 +77,14 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 progress.setVisibility(View.GONE);
 
-                Offer[] offers = new Offer[0];
+                offers = new Offer[0];
                 try {
                     offers = gson.fromJson(response.getJSONArray("products").toString(), Offer[].class);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                OffersAdapter adapter = new OffersAdapter(getBaseContext(), offers);
+                adapter = new OffersAdapter(getBaseContext(), offers);
                 list.setAdapter(adapter);
             }
         }, new Response.ErrorListener() {
