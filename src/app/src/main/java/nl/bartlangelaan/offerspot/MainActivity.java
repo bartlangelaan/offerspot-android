@@ -14,14 +14,20 @@ import android.widget.ProgressBar;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.google.gson.Gson;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import nl.bartlangelaan.offerspot.objects.Offer;
 import nl.bartlangelaan.offerspot.utils.API;
 
 public class MainActivity extends AppCompatActivity {
 
     private String TAG = "MAIN";
+
+    Gson gson = new Gson();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ListView list = (ListView) findViewById(R.id.listView);
+        final ListView list = (ListView) findViewById(R.id.listView);
         final ProgressBar progress = (ProgressBar) findViewById(R.id.progressbar_loading);
 
         API.getInstance(this).GetAllOffers(new Response.Listener<JSONObject>() {
@@ -46,6 +52,15 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 Log.i(TAG, "Response recieved" + response.toString());
                 progress.setVisibility(View.GONE);
+
+                Offer[] offers = new Offer[0];
+                try {
+                    offers = gson.fromJson(response.getJSONArray("products").toString(), Offer[].class);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Log.d(TAG, offers.toString());
             }
         }, new Response.ErrorListener() {
             @Override
