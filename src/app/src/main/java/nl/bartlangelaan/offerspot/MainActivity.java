@@ -1,5 +1,6 @@
 package nl.bartlangelaan.offerspot;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -64,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Offer offer = adapter.getItem(i);
                 Log.d(TAG, offer.toString());
+                Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
+                startActivity(intent);
             }
         });
 
