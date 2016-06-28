@@ -4,7 +4,7 @@
 
 ### Must haves
 
-- [ ] Als ontwikkelaar wil ik dat elke class en method voorzien is van commentaar waarin staat wat deze class of method doet
+- [X] Als ontwikkelaar wil ik dat elke class en method voorzien is van commentaar waarin staat wat deze class of method doet
 - [X] Als gebruiker wil ik een overzicht van alle aanbiedingen kunnen bekijken
 - [X] Als klant wil ik dat de aanbiedingen in de app geladen worden vanuit mijn webservice
 - [X] Als gebruiker wil ik via instellingen kunnen kiezen voor alleen 'nonfood' producten (default = alles)
